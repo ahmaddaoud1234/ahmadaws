@@ -9,6 +9,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: infra  # 👈 tells all steps to run inside 'infra'
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -21,13 +25,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Install dependencies
-        working-directory: infra
         run: npm install
 
-      - name: Build project
-        working-directory: infra
-        run: npm run build
-
       - name: Deploy CDK stack
-        working-directory: infra
         run: npx cdk deploy --require-approval never
