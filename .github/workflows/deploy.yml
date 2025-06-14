@@ -21,11 +21,9 @@ jobs:
           aws-region: us-east-1
 
       - name: Install dependencies
-        run: |
-          cd infra
-          npm install
+        working-directory: infra
+        run: npm install
 
       - name: Deploy CDK stack
-        run: |
-          cd infra
-          npx cdk deploy --require-approval never
+        working-directory: infra
+        run: npx cdk deploy --require-approval never
