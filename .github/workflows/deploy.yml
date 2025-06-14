@@ -24,6 +24,10 @@ jobs:
         working-directory: infra
         run: npm install
 
+      - name: Build project
+        working-directory: infra
+        run: npm run build
+
       - name: Deploy CDK stack
         working-directory: infra
         run: npx cdk deploy --require-approval never
