@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source code
+      - name: Checkout source
         uses: actions/checkout@v3
 
       - name: Configure AWS credentials
@@ -21,10 +21,11 @@ jobs:
           aws-region: us-east-1
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Compile TypeScript
-        run: npm run build
+        run: |
+          cd infra
+          npm install
 
       - name: Deploy CDK stack
-        run: npx cdk deploy --require-approval never
+        run: |
+          cd infra
+          npx cdk deploy --require-approval never
